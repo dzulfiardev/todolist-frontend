@@ -67,19 +67,12 @@ export const useTodoList = defineStore('todoList', () => {
       await fetchTasks();
     } catch (err: any) {
       error.value = err.response?.data?.message || 'Failed to update task'
-      console.error('Error updating task:', err)
+      console.error('Error updating task:', err.response.data.errors)
       throw err // Re-throw to handle in component
     } finally {
       loading.value = false
     }
   }
-
-  // const deleteTask = (id: number) => {
-  //   const index = tasks.value.findIndex(task => task.id === id)
-  //   if (index !== -1) {
-  //     tasks.value.splice(index, 1)
-  //   }
-  // }
 
   const deleteTaskBulk = async () => {
     try {
