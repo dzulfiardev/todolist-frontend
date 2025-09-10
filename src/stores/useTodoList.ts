@@ -20,13 +20,31 @@ export const useTodoList = defineStore('todoList', () => {
   const loading = ref(false)
   const error = ref<string | null>(null)
   const selectedTasks = ref<number[]>([])
+  const search = ref<string>('')
+  const sortBy = ref<string>('')
+  const direction = ref<string>('asc')
 
   // Actions
   const fetchTasks = async () => {
     try {
       loading.value = true
       error.value = null
-      const response = await apiClient.get('/todo-lists')
+      
+      // Build params object, include search if it has value
+      const params: any = {}
+      if (search.value && search.value.trim() !== '') {
+        params.search = search.value.trim()
+      }
+
+      if (sortBy.value) {
+        params.sort_by = sortBy.value
+        params.order_direction = direction.value
+      }
+      
+      const response = await apiClient.get('/todo-lists', {
+        params: params
+      });
+
       tasks.value = response.data.data
     } catch (err: any) {
       error.value = err.response?.data?.message || 'Failed to fetch tasks'
@@ -120,6 +138,9 @@ export const useTodoList = defineStore('todoList', () => {
     loading,
     error,
     selectedTasks,
+    search,
+    sortBy,
+    direction,
     // Getters
     getTasks,
     getTaskById,
