@@ -30,15 +30,14 @@
 
       <!-- Tab Content -->
       <div class="tab-content">
-      
+
         <div v-if="activeTab === 'table'" class="tab-panel">
-          <TodoListTable />  
+          <TodoListTable />
         </div>
 
 
         <div v-if="activeTab === 'kanban'" class="tab-panel">
-          <h2 class="text-xl font-semibold mb-4">Kanban View</h2>
-          <p class="text-gray-300">Kanban view content coming soon...</p>
+          <KanbanBoard />
         </div>
       </div>
     </div>
@@ -49,6 +48,7 @@
 import { ref } from 'vue';
 import Tools from '@/components/TodoList/Tools.vue';
 import TodoListTable from '@/components/TodoList/TodoListTable.vue';
+import KanbanBoard from '@/components/TodoList/KanbanBoard.vue';
 
 // Tab state
 const activeTab = ref('table')

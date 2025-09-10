@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import apiClient from '@/api/axios';
+import apiClient from '@/api/axios'
 
 export interface TodoTask {
   id: number
   task: string
   developer: string[]
   status: string
+  status_raw: string
   priority: string
   type: string
   date: string

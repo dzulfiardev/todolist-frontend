@@ -209,7 +209,7 @@
             <VueDatePicker v-if="editingDateTaskId === task.id" :model-value="parseLocalDate(task.date)"
               @update:model-value="handleDateChange" @closed="cancelDateEdit" auto-apply :enable-time-picker="false"
               format="yyyy-MM-dd" :dark="true" :clearable="false" placeholder="Select date" :inline="false"
-              :auto-focus="true" :utc="false" class="w-full" />
+              :auto-focus="true" :utc="false" style="width: 120px;" />
 
             <!-- Display mode -->
             <span v-else>
