@@ -50,7 +50,7 @@ import TodoListTable from '@/components/TodoList/TodoListTable.vue';
 import KanbanBoard from '@/components/TodoList/KanbanBoard.vue';
 
 // Tab state
-const activeTab = ref('table')
+const activeTab = ref<string>('table')
 </script>
 
 <style scoped>
