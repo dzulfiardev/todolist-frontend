@@ -72,20 +72,20 @@ Then configure your environment variables:
 
 ```env
 # API Configuration
-API_URL=http://localhost:8000/api
+VITE_API_URL=http://localhost:8000/api
 
 # App Configuration
-APP_NAME=Todo List App
-APP_VERSION=1.0.0
+VITE_APP_NAME=Todo List App
+VITE_APP_VERSION=1.0.0
 
 # Environment
-NODE_ENV=development
+VITE_NODE_ENV=development
 ```
 
 **Important Configuration Notes:**
-- **API_URL**: Replace with your actual backend API URL
-- **APP_NAME**: Customize your application name
-- **NODE_ENV**: Set to `production` when deploying
+- **VITE_API_URL**: Replace with your actual backend API URL
+- **VITE_APP_NAME**: Customize your application name
+- **VITE_NODE_ENV**: Set to `production` when deploying
 
 *Note: Never commit your `.env` file to version control as it may contain sensitive information*
 
