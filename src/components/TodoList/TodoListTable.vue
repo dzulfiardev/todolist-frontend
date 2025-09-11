@@ -209,7 +209,7 @@
             <VueDatePicker v-if="editingDateTaskId === task.id" :model-value="parseLocalDate(task.date)"
               @update:model-value="handleDateChange" @closed="cancelDateEdit" auto-apply :enable-time-picker="false"
               format="yyyy-MM-dd" :dark="true" :clearable="false" placeholder="Select date" :inline="false"
-              :auto-focus="true" :utc="false" style="width: 120px;" />
+              :auto-focus="true" :utc="false" style="width: 150px;" />
 
             <!-- Display mode -->
             <span v-else>
@@ -864,11 +864,11 @@ interface OptionsInterface {
 }
 
 const statusOptions = ref<OptionsInterface[]>([
-  { label: 'Ready To Start', value: 'open' },
+  { label: 'Open', value: 'open' },
   { label: 'In Progress', value: 'in_progress' },
   { label: 'Pending', value: 'pending' },
   { label: 'Stuck', value: 'stuck' },
-  { label: 'Done', value: 'completed' },
+  { label: 'Completed', value: 'completed' },
 ]);
 
 const toSnakeCase = (str: string): string | false => {

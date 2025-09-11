@@ -94,10 +94,10 @@ interface KanbanBoard {
 
 const kanbanBoardsByStatus = ref<KanbanBoard[]>([
   { title: 'Pending', value: 'pending', bg_class: 'text-gray-700 bg-yellow-400' },
-  { title: 'Ready To Start', value: 'open', bg_class: 'text-gray-200 bg-blue-600' },
+  { title: 'Open', value: 'open', bg_class: 'text-gray-200 bg-blue-600' },
   { title: 'In Progress', value: 'in_progress', bg_class: 'text-gray-300 bg-indigo-400' },
   { title: 'Stuck', value: 'stuck', bg_class: 'text-gray-200 bg-red-400' },
-  { title: 'Done', value: 'completed', bg_class: 'text-gray-100 bg-green-400' },
+  { title: 'Completed', value: 'completed', bg_class: 'text-gray-100 bg-green-400' },
 ]);
 
 // Helper function to get tasks by status

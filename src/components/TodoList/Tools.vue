@@ -384,11 +384,11 @@ const sortSelectOptions = ref<SelectOptionsInterface[]>([
 ]);
 
 const statusOptions = ref<SelectOptionsInterface[]>([
-  { value: 'open', text: 'Ready To Start', label: 'Ready To Start' },
+  { value: 'open', text: 'Open', label: 'Open' },
   { value: 'in_progress', text: 'In Progress', label: 'In Progress' },
   { value: 'pending', text: 'Pending', label: 'Pending' },
   { value: 'stuck', text: 'Stuck', label: 'Stuck' },
-  { value: 'completed', text: 'Done', label: 'Done' },
+  { value: 'completed', text: 'Completed', label: 'Completed' },
 ]);
 
 const priorityOptions = ref<SelectOptionsInterface[]>([
