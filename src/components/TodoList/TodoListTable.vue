@@ -323,6 +323,17 @@ import Swal from 'sweetalert2'
 // Store
 const todoStore = useTodoList()
 
+interface AxiosError {
+  response?: {
+    data?: {
+      errors?: any;
+      message?: string;
+    };
+  };
+  message?: string;
+}
+
+
 // Fetch tasks on component mount
 onMounted(async () => {
   await todoStore.fetchTasks()
@@ -903,7 +914,7 @@ const typeOptions = ref<OptionsInterface[]>([
   { label: 'Other', value: 'other' },
 ]);
 
-const handleErrorMessage = (error: Object) => {
+const handleErrorMessage = (error: AxiosError) => {
   let errorMessage = 'Failed to update date'
 
   if (error.response?.data?.errors) {

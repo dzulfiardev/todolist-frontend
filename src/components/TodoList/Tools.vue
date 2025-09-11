@@ -258,6 +258,16 @@ const props = defineProps<{
   activeTab: string
 }>()
 
+interface AxiosError {
+  response?: {
+    data?: {
+      errors?: any;
+      message?: string;
+    };
+  };
+  message?: string;
+}
+
 const availableDevelopers = ref<string[]>([
   'Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Judy', 'Zul'
 ])
@@ -405,7 +415,7 @@ const typeOptions = ref<SelectOptionsInterface[]>([
   { value: 'other', text: 'Other', label: 'Other' },
 ]);
 
-const handleErrorMessage = (error: Object) => {
+const handleErrorMessage = (error: AxiosError) => {
   let errorMessage = 'Failed to update date'
 
   if (error.response?.data?.errors) {
