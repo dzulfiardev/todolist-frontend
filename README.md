@@ -62,13 +62,32 @@ yarn install
 
 ### 3. Environment Setup
 
-Create a `.env` file in the root directory and configure your API endpoint:
+Create a `.env` file in the root directory by copying the example file:
 
-```env
-VITE_API_BASE_URL=http://localhost:8000/api
+```bash
+cp .env.example .env
 ```
 
-*Note: Replace with your actual backend API URL*
+Then configure your environment variables:
+
+```env
+# API Configuration
+API_URL=http://localhost:8000/api
+
+# App Configuration
+APP_NAME=Todo List App
+APP_VERSION=1.0.0
+
+# Environment
+NODE_ENV=development
+```
+
+**Important Configuration Notes:**
+- **API_URL**: Replace with your actual backend API URL
+- **APP_NAME**: Customize your application name
+- **NODE_ENV**: Set to `production` when deploying
+
+*Note: Never commit your `.env` file to version control as it may contain sensitive information*
 
 ### 4. Start Development Server
 
@@ -157,14 +176,16 @@ The application uses a dark theme by default. You can customize colors in:
 
 ### API Configuration
 
-Update the API base URL in `src/api/axios.ts`:
+Update the API configuration in `src/api/axios.ts`:
 
 ```typescript
 const apiClient = axios.create({
-  baseURL: process.env.VITE_API_BASE_URL || 'http://localhost:8000/api',
+  baseURL: process.env.API_URL || 'http://localhost:8000/api',
   // ... other configurations
 })
 ```
+
+Make sure your `.env` file contains the correct API_URL for your backend service.
 
 ## 🐛 Troubleshooting
 
