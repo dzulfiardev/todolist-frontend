@@ -1,6 +1,6 @@
 <template>
   <div
-    class="kanban-container border-2 border-white/20 rounded-lg p-6 text-white overflow-x-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-500">
+    class="kanban-container border-2 h-[70vh] border-white/20 rounded-lg p-6 text-white overflow-x-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-500">
     <div class="flex flex-col">
       <div class="flex space-x-4 min-w-max">
 
@@ -40,10 +40,12 @@
                     {{ task.type }}
                   </div>
 
-                  <div>
-                    <div class="text-xs font-semibold px-2 py-1 rounded whitespace-nowrap bg-gray-600">
-                      {{ getSpText(task.estimated_sp) }} SP
-                    </div>
+                  <div class="text-xs font-semibold px-2 py-1 rounded whitespace-nowrap bg-gray-600">
+                    {{ getSpText(task.estimated_sp) }} SP
+                  </div>
+
+                  <div class="text-xs font-semibold px-2 py-1 rounded whitespace-nowrap bg-gray-600">
+                    {{ getSpText(task.actual_sp) }} SP
                   </div>
                 </div>
 
@@ -91,9 +93,9 @@ interface KanbanBoard {
 }
 
 const kanbanBoardsByStatus = ref<KanbanBoard[]>([
+  { title: 'Pending', value: 'pending', bg_class: 'text-gray-700 bg-yellow-400' },
   { title: 'Ready To Start', value: 'open', bg_class: 'text-gray-200 bg-blue-600' },
   { title: 'In Progress', value: 'in_progress', bg_class: 'text-gray-300 bg-indigo-400' },
-  { title: 'Pending', value: 'pending', bg_class: 'text-gray-700 bg-yellow-400' },
   { title: 'Stuck', value: 'stuck', bg_class: 'text-gray-200 bg-red-400' },
   { title: 'Done', value: 'completed', bg_class: 'text-gray-100 bg-green-400' },
 ]);

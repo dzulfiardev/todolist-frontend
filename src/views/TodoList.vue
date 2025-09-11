@@ -1,8 +1,8 @@
 <template>
   <!-- Parent Container -->
-  <div class="min-h-screen bg-custom-dark py-8">
+  <div class="min-h-screen bg-custom-dark py-8 main-container-padding-x">
     <!-- Main Content Container -->
-    <div class="main-container max-w-7xl mx-auto px-4 text-white">
+    <div class="main-container max-w-10xl mx-auto px-4 text-white">
       <!-- Tab Navigation -->
       <div class="mb-6">
         <nav class="flex border-b-2 border-white/20" aria-label="Tabs">
@@ -26,7 +26,7 @@
         </nav>
       </div>
 
-      <Tools />
+      <Tools :activeTab="activeTab" />
 
       <!-- Tab Content -->
       <div class="tab-content">
@@ -34,7 +34,6 @@
         <div v-if="activeTab === 'table'" class="tab-panel">
           <TodoListTable />
         </div>
-
 
         <div v-if="activeTab === 'kanban'" class="tab-panel">
           <KanbanBoard />
@@ -53,3 +52,18 @@ import KanbanBoard from '@/components/TodoList/KanbanBoard.vue';
 // Tab state
 const activeTab = ref('table')
 </script>
+
+<style scoped>
+.main-container-padding-x {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media screen and (max-width: 640px) {
+  .main-container-padding-x {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+}
+</style>

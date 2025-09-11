@@ -24,13 +24,23 @@ export const useTodoList = defineStore('todoList', () => {
   const search = ref<string>('')
   const sortBy = ref<string>('')
   const direction = ref<string>('asc')
+  const successAddNew = ref<boolean>(false)
+
+  const task = ref<string>('New Task')
+  const developer = ref<string[]>([])
+  const status = ref<string>('To Do')
+  const priority = ref<string>('Medium')
+  const type = ref<string>('Feature')
+  const date = ref<string>(new Date().toISOString().split('T')[0]) // Default to today
+  const estimated_sp = ref<number>(1)
+  const actual_sp = ref<number>(0)
 
   // Actions
   const fetchTasks = async () => {
     try {
       loading.value = true
       error.value = null
-      
+
       // Build params object, include search if it has value
       const params: any = {}
       if (search.value && search.value.trim() !== '') {
@@ -41,7 +51,7 @@ export const useTodoList = defineStore('todoList', () => {
         params.sort_by = sortBy.value
         params.order_direction = direction.value
       }
-      
+
       const response = await apiClient.get('/todo-lists', {
         params: params
       });
@@ -66,7 +76,32 @@ export const useTodoList = defineStore('todoList', () => {
     } finally {
       loading.value = false
     }
+  }
 
+  const addNewTaskWithParams = async () => {
+    try {
+      loading.value = true
+      const developerString: string = developer.value.join(', ')
+      const payloads = {
+        task: task.value,
+        developer: developerString,
+        status: status.value,
+        priority: priority.value,
+        type: type.value,
+        due_date: date.value,
+        estimated_sp: estimated_sp.value,
+        actual_sp: actual_sp.value
+      }
+      // console.log('Payloads:', payloads)
+      const { data } = await apiClient.post('/todo-lists', payloads)
+      successAddNew.value = data.success
+      await fetchTasks()
+    } catch (err: any) {
+      error.value = err
+      console.error('Error adding new task:', err)
+    } finally {
+      loading.value = false
+    }
   }
 
   // Getters
@@ -81,7 +116,7 @@ export const useTodoList = defineStore('todoList', () => {
       loading.value = true
       error.value = null
       await apiClient.put(`/todo-lists/${id}`, updatedTask)
-      
+
       // Update local state
       await fetchTasks();
     } catch (err: any) {
@@ -142,6 +177,16 @@ export const useTodoList = defineStore('todoList', () => {
     search,
     sortBy,
     direction,
+    successAddNew,
+    task,
+    developer,
+    status,
+    priority,
+    type,
+    date,
+    estimated_sp,
+    actual_sp,
+    // Mutations
     // Getters
     getTasks,
     getTaskById,
@@ -151,6 +196,7 @@ export const useTodoList = defineStore('todoList', () => {
     // Actions
     fetchTasks,
     addNewTask,
+    addNewTaskWithParams,
     updateTask,
     deleteTaskBulk,
     toggleTaskSelection,
