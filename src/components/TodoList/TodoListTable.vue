@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-auto">
+  <div class="todolist-table-wrapper">
     <table class="w-full border-collapse border border-gray-600 bg-gray-700">
       <!-- Table Header -->
       <thead>
@@ -955,3 +955,15 @@ const handleErrorMessage = (error: AxiosError) => {
 }
 
 </script>
+
+<style scoped>
+.todolist-table-wrapper {
+  overflow: visible;
+}
+
+@media (max-width: 996px) {
+  .todolist-table-wrapper {
+    overflow: auto;
+  }
+}
+</style>
