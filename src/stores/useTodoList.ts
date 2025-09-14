@@ -212,6 +212,6 @@ export const useTodoList = defineStore('todoList', () => {
     deleteTaskBulk,
     toggleTaskSelection,
     toggleSelectAll,
-    clearSelection
+    clearSelection,
   }
 })

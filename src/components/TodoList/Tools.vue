@@ -415,7 +415,7 @@ const typeOptions = ref<SelectOptionsInterface[]>([
   { value: 'other', text: 'Other', label: 'Other' },
 ]);
 
-const handleErrorMessage = (error: AxiosError) => {
+const handleErrorMessage = (error: AxiosError | any) => {
   let errorMessage = 'Failed to update date'
 
   if (error.response?.data?.errors) {
