@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import apiClient from '@/api/axios'
+import { Axios } from 'axios'
 
 export interface TodoTask {
   id: number
@@ -15,11 +16,21 @@ export interface TodoTask {
   actual_sp: number
 }
 
+export interface AxiosError {
+  response?: {
+    data?: {
+      errors?: any;
+      message?: string;
+    };
+  };
+  message?: string;
+}
+
 export const useTodoList = defineStore('todoList', () => {
   // State
   const tasks = ref<TodoTask[]>([])
   const loading = ref(false)
-  const error = ref<string | null>(null)
+  const error = ref<string | null | AxiosError>(null)
   const selectedTasks = ref<number[]>([])
   const search = ref<string>('')
   const sortBy = ref<string>('')
