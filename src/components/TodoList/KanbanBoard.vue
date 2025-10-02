@@ -81,8 +81,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useTodoList } from '@/stores/useTodoList';
+import { webSocketService } from '@/services/websocket'
+
+// Initialize WebSocket on component mount
+onMounted(async () => {
+  await store.fetchTasks()
+
+  // Initialize WebSocket connection (no user ID needed)
+  webSocketService.connect()
+
+  // Add click outside listener
+})
+
+// Clean up on unmount
+onBeforeUnmount(() => {
+  webSocketService.disconnect()
+})
 
 const store = useTodoList();
 

@@ -237,14 +237,14 @@
           <td @click="startActualSpEdit(task.id, getSpText(task.actual_sp))"
             class="p-2 text-gray-200 text-sm text-center cursor-pointer transition-colors duration-200 actual-sp-edit-container"
             :class="editingActualSpTaskId === task.id ? 'bg-gray-700 hover:bg-gray-700' : 'hover:bg-gray-600'">
-            
+
             <!-- Edit mode - Number input -->
-            <input v-if="editingActualSpTaskId === task.id" v-model="editingActualSpValue" type="number"
-              step="0.1" min="0" :data-actual-sp-id="task.id" @keydown="handleActualSpKeydown($event, task.id)"
+            <input v-if="editingActualSpTaskId === task.id" v-model="editingActualSpValue" type="number" step="0.1"
+              min="0" :data-actual-sp-id="task.id" @keydown="handleActualSpKeydown($event, task.id)"
               @blur="saveActualSpEdit(task.id)"
               class="w-20 bg-gray-800 text-gray-200 text-center border border-gray-500 rounded px-2 py-1 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               placeholder="Enter actual SP" />
-            
+
             <!-- Display mode -->
             <span v-else>
               {{ getSpText(task.actual_sp) }} SP
@@ -319,6 +319,24 @@ import { useTodoList } from '@/stores/useTodoList'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2'
+import { webSocketService } from '@/services/websocket'
+
+// Initialize WebSocket on component mount
+onMounted(async () => {
+  await todoStore.fetchTasks()
+
+  // Initialize WebSocket connection (no user ID needed)
+  webSocketService.connect()
+
+  // Add click outside listener
+  document.addEventListener('click', handleClickOutside)
+})
+
+// Clean up on unmount
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+  webSocketService.disconnect()
+})
 
 // Store
 const todoStore = useTodoList()
